@@ -19,7 +19,7 @@ export default function App() {
         placeholder='type here'
         style={styles.input}
         value={text}
-        onChange={changeTextHandler} />
+        onChangeText={changeTextHandler} />
       <Text>{text}</Text>
     </View>
   );
