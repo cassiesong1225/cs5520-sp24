@@ -11,7 +11,8 @@ export default function Input({ inputHandler,modalVisible }) {
     setText(changedText);
   }
   function confirmHandler() {
-        inputHandler(text);
+    inputHandler(text);
+    setText("");
   }
   function cancelHandler() {
     // hide the modal

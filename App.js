@@ -44,5 +44,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   bottomView: { flex: 4, backgroundColor: "lightpink" },
-  text: { textAlign: "center" },
+  text: {
+    textAlign: "center",
+    padding: 10,
+    margin: 50,
+  },
 });
