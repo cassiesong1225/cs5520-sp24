@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     color: "#929",
-    padding: 5,
+    padding: 6,
     borderRadius: 10,
   },
   textContainer: {
