@@ -3,22 +3,6 @@ import React from "react";
 import PressableButton from "./PressableButton";
 import { AntDesign } from "@expo/vector-icons";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default function GoalItem({ goalObj, deleteFunction, detailFunction }) {
   function deleteHandler() {
     deleteFunction(goalObj.id);
