@@ -1,49 +1,65 @@
-import { StyleSheet, Text, TextInput, View,Button,Image,
-  Modal, } from "react-native";
+import {
+  Button,
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 
-export default function Input({ inputHandler,modalVisible }) {
- const [text, setText] = useState("");
+export default function Input({ inputHandler, modalVisible, dismissModal }) {
+  const [text, setText] = useState("");
   // callback handler
- //const [ismodalVisible, setismodalVisible] = useState(false);
   function changeTextHandler(changedText) {
-    console.log("user is typing ", changedText);
+    // console.log("user is typing ", changedText);
+
     setText(changedText);
   }
+
   function confirmHandler() {
     inputHandler(text);
     setText("");
   }
   function cancelHandler() {
+    setText("");
+
     // hide the modal
     dismissModal();
   }
   return (
-    <Modal visible={ modalVisible}>
+    <Modal visible={modalVisible} animationType="slide" transparent={true}>
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: "https://cdn-icons-png.flaticon.com/512/2617/2617812.png",
-          }}
-          style={styles.image}
-        />
-        <Image source={require("../assets/goal.png")} style={styles.image} />
-        <TextInput
-          placeholder="Type something"
-          style={styles.input}
-          value={text}
-          onChangeText={changeTextHandler}
+        <View style={styles.modalView}>
+          <Image
+            source={{
+              uri: "https://cdn-icons-png.flaticon.com/512/2617/2617812.png",
+            }}
+            style={styles.image}
           />
-       <View style={styles.buttonsContainer}>
-          <View style={styles.buttonView}>
-            <Button title="Cancel" onPress={cancelHandler} />
-          </View>
-          <View style={styles.buttonView}>
-            <Button title="Confirm" onPress={confirmHandler} />
+          <Image source={require("../assets/goal.png")} style={styles.image} />
+          <TextInput
+            placeholder="Type something"
+            style={styles.input}
+            value={text}
+            onChangeText={changeTextHandler}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonView}>
+              <Button title="Cancel" onPress={cancelHandler} />
+            </View>
+            <View style={styles.buttonView}>
+              <Button
+                title="Confirm"
+                onPress={confirmHandler}
+                disabled={!text}
+              />
+            </View>
           </View>
         </View>
-        </View>
-      </Modal>
+      </View>
+    </Modal>
   );
 }
 
@@ -51,6 +67,13 @@ const styles = StyleSheet.create({
   buttonView: {
     width: "30%",
     margin: 5,
+  },
+
+  modalView: {
+    backgroundColor: "#999",
+    borderRadius: 20,
+    padding: "10%",
+    alignItems: "center",
   },
   buttonsContainer: { flexDirection: "row" },
   input: {
@@ -60,7 +83,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#ccc",
     alignItems: "center",
     justifyContent: "center",
   },
