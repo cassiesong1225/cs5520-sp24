@@ -5,6 +5,9 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore } from 'firebase/firestore'
 import { apiKey,authDomain,projectId,storageBucket,messagingSenderId,appId,measurementId } from "@env"
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { initializeAuth , getReactNativePersistence} from 'firebase/auth'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,4 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const auth = initializeAuth(app, {
+persistence: getReactNativePersistence(AsyncStorage)
+});
 export const database = getFirestore(app);
