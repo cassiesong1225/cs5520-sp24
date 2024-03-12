@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
+const windowWidth = Dimensions.get('window').width;
+
 export default function Header({ name }) {
   return (
     <View>
