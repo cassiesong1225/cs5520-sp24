@@ -32,7 +32,7 @@ export default function GoalDetails({ navigation, route }) {
         title="extra details"
         onPress={() => navigation.push("Details")}
       />
-      <GoalUsers id={ route.params.data.id}/>
+      <GoalUsers id={route.params.data.id} />
     </View>
   );
 }

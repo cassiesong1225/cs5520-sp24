@@ -1,22 +1,25 @@
-import { collection, addDoc,deleteDoc,doc,getDocs } from "firebase/firestore";
-import { database } from "./firebaseSetup";
-export async function writeToDB(data, col, docID, subCol) {
-    try {
-        if (docID) {
-            await addDoc(collection(database, col, docID, subCol), data);
-        } else {
-            await addDoc(collection(database, "goals"), data);
-        }
-    }
-    catch (err) { console.log("Error adding document: ", err); }
-}
+import {
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  getDocs,
+} from "firebase/firestore";
+import { database, auth } from "./firebaseSetup";
 
-
-export async function deleteFromDB(id) { 
-    try { await deleteDoc(doc(database, "goals",id)); }
-    catch (err) {
-        console.log("Error deleting document: ", err);
+export async function writeToDB(data, col, docId, subCol) {
+  try {
+    if (docId) {
+      await addDoc(collection(database, col, docId, subCol), data);
+    } else {
+      if (col === "goals") {
+        data = { ...data, owner: auth.currentUser.uid };
+      }
+      await addDoc(collection(database, col), data);
     }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export async function getAllDocs(path) {
@@ -33,4 +36,10 @@ export async function getAllDocs(path) {
   }
 }
 
-
+export async function deleteFromDB(id) {
+  try {
+    await deleteDoc(doc(database, "goals", id));
+  } catch (err) {
+    console.log(err);
+  }
+}
