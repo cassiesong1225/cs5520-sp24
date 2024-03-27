@@ -1,47 +1,39 @@
-import { StyleSheet, Button, View } from 'react-native'
-import React, { useState, useEffect } from 'react';
-import * as ImagePicker from 'expo-image-picker';
+import { View, StyleSheet, Button, Alert, Image } from "react-native";
+import React, { useState } from "react";
 
-export default function ImageManager({ receiveImageURI}) {
-   
+import * as ImagePicker from "expo-image-picker";
+
+export default function ImageManager({ receiveImageURI }) {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
-  const [imageUri, setImageUri] = useState(""); 
-
-
-    async function verifyPermission() {
-        if (status.granted) {
-           return true;
-        }
-        try {
-            const permissionResponse = await requestPermission();;
-            console.log(permissionResponse);
-            return permissionResponse.granted;
-        } catch (err) { 
-            console.log(err);
-
-        }
+  const [imageUri, setImageUri] = useState("");
+  async function verifyPermission() {
+    if (status.granted) {
+      return true;
     }
-
-    async function takeImageHandler() {
-        try {
-        const havePermission = await verifyPermission();
-        if (!havePermission) {
+    try {
+      const permissionResponse = await requestPermission();
+      return permissionResponse.granted;
+    } catch (err) {
+      console.log("verifyPermission",err);
+    }
+  }
+  async function takeImageHandler() {
+    try {
+      const havePermission = await verifyPermission();
+      if (!havePermission) {
         Alert.alert("You need to give permission");
         return;
       }
-         const results = await ImagePicker.launchCameraAsync({
-          allowsEditing: true,
+
+      const results = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
       });
-        receiveImageURI(results.assets[0].uri);
-        setImageUri(results.assets[0].uri);
-        } catch (err) {
-        console.log(err);
+      receiveImageURI(results.assets[0].uri);
+      setImageUri(results.assets[0].uri);
+    } catch (err) {
+      console.log(err);
     }
   }
-    
-
-
-
   return (
     <View style={styles.container}>
       <Button title="Take an Image" onPress={takeImageHandler} />
@@ -54,12 +46,11 @@ export default function ImageManager({ receiveImageURI}) {
         />
       )}
     </View>
-  )
+  );
 }
-
 const styles = StyleSheet.create({
-    container: {
+  container: {
     marginVertical: 5,
   },
   image: { width: 100, height: 100 },
-})
+});

@@ -21,7 +21,7 @@ export default function Input({ inputHandler, modalVisible, dismissModal }) {
   }
 
   function confirmHandler() {
-    inputHandler(text,imageURI);
+    inputHandler(text, imageURI);
     setText("");
   }
   function cancelHandler() {
@@ -30,7 +30,7 @@ export default function Input({ inputHandler, modalVisible, dismissModal }) {
     // hide the modal
     dismissModal();
   }
-   function receiveImageURI(takenImageUri) {
+  function receiveImageURI(takenImageUri) {
     setImageURI(takenImageUri);
   }
   return (
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
-    backgroundColor: "#999",
+    backgroundColor: "#eee",
     borderRadius: 20,
     padding: "10%",
     alignItems: "center",

@@ -3,7 +3,6 @@ import React from "react";
 import PressableButton from "./PressableButton";
 import { AntDesign } from "@expo/vector-icons";
 
-
 export default function GoalItem({ goalObj, deleteFunction, detailFunction }) {
   function deleteHandler() {
     deleteFunction(goalObj.id);
@@ -21,12 +20,10 @@ export default function GoalItem({ goalObj, deleteFunction, detailFunction }) {
         // android_ripple={{ color: "#e9e" }}
       >
         <Text style={styles.text}>{goalObj.text}</Text>
-
         <PressableButton onPressFunction={deleteHandler}>
           <AntDesign name="delete" size={24} color="black" />
         </PressableButton>
       </Pressable>
-   
     </View>
   );
 }
@@ -40,13 +37,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     color: "#929",
-    padding: 6,
+    padding: 5,
     borderRadius: 10,
   },
   textContainer: {
     borderRadius: 10,
     backgroundColor: "#aaa",
-    marginTop: 15,  
+    marginTop: 15,
     flexDirection: "row",
     alignItems: "center",
   },
